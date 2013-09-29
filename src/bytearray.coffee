@@ -9,7 +9,7 @@
 
 module.exports =
 
-  # co-read to actionscript's writeUTF
+  # Reads a UTF-8 string from the byte stream. The string is assumed to be prefixed with an unsigned short indicating the length in bytes.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readUTF : (buf, offset)->
@@ -21,7 +21,18 @@ module.exports =
     return null if buf.length < len + offset
     offset += 2
     buf.position = offset + len
-    buf.toString 'utf8', offset, offset+len
+    return buf.toString 'utf8', offset, offset+len
+
+  # Reads a sequence of UTF-8 bytes specified by the length parameter from the byte stream and returns a string.
+  # @param {Buff} buf
+  # @param {uint} length, number of bytes to read
+  # @param {int} [offset] optional, specify the offset where read should beging
+  readUTFBytes : (buf, length, offset)->
+    return null unless Buffer.isBuffer buf
+    offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
+    return null if buf.length <= offset
+    buf.position = offset + length
+    return buf.toString 'utf8', offset, offset + length
 
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
@@ -35,7 +46,7 @@ module.exports =
     buf.position = offset + len
     buf.toString 'utf8', offset, offset+len
 
-  # co-read to actionscript's ByteArray.readUnsignedShort
+  # Reads an unsigned 16-bit integer from the byte stream.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readUnsignedShort : (buf, offset)->
@@ -44,7 +55,7 @@ module.exports =
     buf.position = offset + 2
     return buf.readUInt16BE offset
 
-  # co-read to actionscript's ByteArray.readShort
+  # Reads a 16-bit integer from the byte stream.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readShort : (buf, offset)->
@@ -62,7 +73,7 @@ module.exports =
     buf.position = offset + 1
     buf.readUInt8 offset
 
-  # co-read to actionscript's ByteArray.readByte
+  # Reads a byte from the byte stream.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readByte : (buf, offset)->
@@ -71,7 +82,7 @@ module.exports =
     buf.position = offset + 1
     buf.readInt8 offset
 
-  # co-read to actionscript's ByteArray.readUnsignedInt
+  # Reads an unsigned byte from the byte stream.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readUnsignedInt: (buf, offset)->
@@ -80,7 +91,7 @@ module.exports =
     buf.position = offset + 4
     buf.readUInt32BE offset
 
-  # co-read to actionscript's ByteArray.readInt
+  # Reads a signed 32-bit integer from the byte stream.
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readInt: (buf, offset)->
