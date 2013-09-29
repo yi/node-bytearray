@@ -1,6 +1,6 @@
 {
   "name": "bytearray",
-  "description": "a Node.JS module for Buffer processing exposes API similar to ByteArray of ActionScript"
+  "description": "a Node.JS module for Buffer processing exposes API similar to ByteArray of ActionScript",
   "version": "0.1.0",
   "homepage": "https://github.com/yi/node-bytearray",
   "author": {
