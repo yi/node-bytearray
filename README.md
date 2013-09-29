@@ -2,26 +2,30 @@
 
 The best project ever.
 
-## Getting Started
+## Install
 Install the module with: `npm install bytearray`
 
 ```javascript
 var bytearray = require('bytearray');
-bytearray.awesome(); // "awesome"
 ```
 
-## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
+## Usage
+ * bytearray.readBoolean(buf, [offset]):Boolean
+ * bytearray.readInt(buf, [offset]):int
+ * bytearray.readShort(buf, [offset]):int
+ * bytearray.readUnsignedByte(buf, [offset]):uint
+ * bytearray.readUnsignedInt(buf, [offset]):uint
+ * bytearray.readUnsignedShort(buf, [offset]):uint
+ * bytearray.readUTF(buf, [offset]):String
+ * bytearray.readUTFByte(buf, [offset]s(length:uint):String
+ * bytearray.writeBoolean(value:Boolean):void
+ * bytearray.writeByte(value:int):void
+ * bytearray.writeBytes(bytes:ByteArray, offset:uint = 0, length:uint = 0):void
+ * bytearray.writeInt(value:int):void
+ * bytearray.writeShort(value:int):void
+ * bytearray.writeUnsignedInt(value:uint):void
+ * bytearray.writeUTF(value:String):void
 
 ## License
-Copyright (c) 2013 yi  
+Copyright (c) 2013 yi
 Licensed under the MIT license.
