@@ -1,6 +1,6 @@
 # bytearray
 
-The best project ever.
+a Node.JS module for Buffer processing exposes API similar to ByteArray of ActionScript
 
 ## Install
 Install the module with: `npm install bytearray`
