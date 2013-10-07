@@ -61,7 +61,19 @@ describe 'bytearray', ->
     buf.position.should.equal(byteLength)
     bytearray.readUTFBytes(buf, byteLength, 0).should.equal str
 
+  it 'should read and write Float correctly' , ->
+    sample = [321.324241, 0.323131, 4242.5435, 0.43242342]
+    buf = new Buffer sample.length * 4
+    for i in [0...sample.length] by 1
+      bytearray.writeFloat buf, sample[i]
 
+    buf.position = 0
+
+    for i in [0...sample.length] by 1
+      orgin = sample[i]
+      readback = bytearray.readFloat(buf)
+      console.log "[bytearray_test::Float test] orgin:#{orgin}, readback:#{readback}"
+      Math.abs(readback - orgin).should.below(0.01)
 
 
 

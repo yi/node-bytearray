@@ -101,6 +101,20 @@ module.exports =
     buf.position = offset + 4
     buf.readInt32BE offset
 
+  # Reads a signed 32-bit integer from the byte stream.
+  # @param {Buff} buf
+  # @param {int} [offset] optional, specify the offset where read should beging
+  readFloat : (buf, offset)->
+    return 0 unless Buffer.isBuffer buf
+    offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
+    buf.position = offset + 4
+    buf.readFloatLE offset
+    # TODO:
+    #   this is a quick hack, should implement a proper endian swicher
+    # ty 2013-10-08
+
+
+
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
   readUnsignedIntArray:(buf, offset)->
@@ -137,6 +151,23 @@ module.exports =
     buf.writeInt32BE value, offset
     buf.position = offset + 4
     return
+
+
+  # @param {Buff} buf
+  # @param {int} value
+  # @param {int} [offset] optional, specify the offset where read should beging
+  writeFloat : (buf, value, offset) ->
+    offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
+    buf.writeFloatLE value, offset
+    # TODO:
+    #   this is a quick hack, should implement a proper endian swicher
+    # ty 2013-10-08
+
+    buf.position = offset + 4
+    return
+
+
+
 
   # @param {Buff} buf
   # @param {ushort} value
