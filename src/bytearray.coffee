@@ -32,7 +32,8 @@ module.exports =
     offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
     return null if buf.length <= offset
     buf.position = offset + length
-    return buf.toString 'utf8', offset, offset + length
+    #console.log "[bytearray::readUTFBytes] buf:#{buf}, offset:#{offset}"
+    return buf.toString('utf8', offset, offset + length)
 
   # @param {Buff} buf
   # @param {int} [offset] optional, specify the offset where read should beging
@@ -215,7 +216,6 @@ module.exports =
   # 以 UTF-8 方式在bytes中写入动态长度的字符串，并且保持 position 的连续
   # buf : 需要写入的 Buffer 实例
   # str : 需要写入的字符串
-  # maxNumOfChar : 最多所写入的字符长度
   # offset : 从自定义的偏移处开始写
   writeUTF: (buf, str, offset) ->
     offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
@@ -224,6 +224,16 @@ module.exports =
     offset += 2 # +2 因为已经写了2byte的utf长度
     buf.write(str, offset)
     buf.position = offset + byteLength
+    return
+
+  # 以 UTF-8 方式在bytes中写入动态长度的字符串，并且保持 position 的连续
+  # buf : 需要写入的 Buffer 实例
+  # str : 需要写入的字符串
+  # offset : 从自定义的偏移处开始写
+  writeUTFBytes: (buf, str, offset) ->
+    offset = if offset < 0 then buf.length + offset else (if offset is 0 then 0 else offset || buf.position || 0)
+    buf.write(str, offset)
+    buf.position = offset + Buffer.byteLength(str)
     return
 
   # 以 UTF-8 方式在bytes中写入动态长度的字符串，并且保持 position 的连续

@@ -51,3 +51,24 @@ describe 'bytearray', ->
     console.log "[bytearray_test::write/read an uint vector] arr:#{arr}"
     arr.join(',').should.eql(VECTOR_UINT_1.join(','))
 
+  it 'should read and write UTFBytes correctly' , ->
+    str = "hellow, how are you"
+    byteLength = Buffer.byteLength(str)
+    buf = new Buffer byteLength
+    bytearray.writeUTFBytes buf, str
+    buf2 = new Buffer str
+    buf.toString('hex').should.equal(buf2.toString('hex'))
+    buf.position.should.equal(byteLength)
+    bytearray.readUTFBytes(buf, byteLength, 0).should.equal str
+
+
+
+
+
+
+
+
+
+
+
+
