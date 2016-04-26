@@ -1,3 +1,7 @@
+# DEPRECATED! DO NOT USE! 
+# PLEASE USE NodeJS NATIVE BUFFER PROCESSORS
+# DEPRECATED! DO NOT USE! 
+
 # bytearray
 
 a Node.JS module for Buffer processing exposes API similar to ByteArray of ActionScript
